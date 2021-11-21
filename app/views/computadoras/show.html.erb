@@ -1,0 +1,10 @@
+<h1><%=@computadora.to_s%> </h1>
+
+        <td><%= @computadora.memoria %></td>
+        <td><%= @computadora.disco %></td>
+
+    <% @programas.each do |programa| %>
+      <tr>
+        <td><%= link_to 'Instalar', programa_path(computadora)   %></td>
+      </tr>
+    <% end %>

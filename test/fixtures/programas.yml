@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  ejecuciones: 1
+  computadora: one
+
+two:
+  nombre: MyString
+  ejecuciones: 1
+  computadora: two
