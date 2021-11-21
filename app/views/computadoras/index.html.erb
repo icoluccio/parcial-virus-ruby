@@ -1,0 +1,22 @@
+<h1>Computadoras</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Memoria</th>
+      <th>Disco</th>
+      <th>Administrar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @computadoras.each do |computadora| %>
+      <tr>
+        <td><%= computadora.memoria %></td>
+        <td><%= computadora.disco %></td>
+        <td><%= link_to 'Administrar', computadora_path(computadora)   %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
