@@ -1,0 +1,37 @@
+<%if programa.present?%>
+  <div class="card" style="margin-right: 10px;">
+    <div style="border-bottom: 1px solid #aaaaaa; margin-left: 150px; margin-right: 25px;">
+      <h3 class="card-header">
+        <%=programa.nombre%>
+      </h3>
+    <div>
+    
+    <% programa.attributes.except('id', 'created_at', 'updated_at', 'programa_id', 'nombre', 'computadora_id').each do |atributo, value| %>
+      <div>
+        <b><%= atributo %></b>: <%=programa.send(atributo)%>
+      </div>
+    <% end %>  
+        
+    <% if programa.computadora.present? && programa.programa.nil? %>
+      <div style="margin-top: 10px;">
+        <% unless programa.ejecutando%>
+          <a href="<%=ejecutar_computadora_path(programa.computadora, params: {id_de_programa: programa.id}) %>" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Ejecutar</a>
+        <% end %>
+        <% if programa.ejecutando%>
+          <a href="<%=frenar_computadora_path(programa.computadora, params: {id_de_programa: programa.id}) %>" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">Frenar</a>
+        <% end %>
+        <a href="<%= desinstalar_computadora_path(programa.computadora, params: {id_de_programa: programa.id}) %>" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Desinstalar</a>
+      </div>
+    <%end%>
+    
+    <hr>
+    
+    <%if programa.programas.present? %>
+      <h3>  Programas hospedados </h3>
+      <% programa.programas.each do |programa| %>
+        <%= render partial: "programa", locals: { programa: programa } %> 
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+<%end%>

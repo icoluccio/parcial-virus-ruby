@@ -17,9 +17,21 @@ class Programa < ApplicationRecord
 
   def ejecutar
     update(ejecutando: true)
+    programas.each(&:ejecutar)
+  end
+
+  def correr(computadora)
+    programas.each { |programa| programa.correr(computadora) }
+    self.ejecuciones += 1
+    save!
   end
 
   def frenar
     update(ejecutando: false)
+  end
+
+  def ser_infectado_por(programa)
+    programas << programa
+    save!
   end
 end

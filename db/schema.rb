@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_153530) do
+ActiveRecord::Schema.define(version: 2021_11_21_153531) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "computadoras", force: :cascade do |t|
     t.float "memoria"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 2021_11_21_153530) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.integer "programa_id", null: false
-    t.integer "computadora_id", null: false
+    t.bigint "programa_id", null: false
+    t.bigint "computadora_id", null: false
     t.text "hecho"
     t.integer "turno"
     t.datetime "created_at", precision: 6, null: false
@@ -32,12 +35,14 @@ ActiveRecord::Schema.define(version: 2021_11_21_153530) do
 
   create_table "programas", force: :cascade do |t|
     t.string "nombre"
+    t.string "type", default: "Programa"
     t.boolean "ejecutando", default: false
+    t.integer "potencia", default: 0
     t.integer "memoria", default: 0
     t.integer "disco", default: 0
     t.integer "ejecuciones", default: 0
-    t.integer "computadora_id"
-    t.integer "programa_id"
+    t.bigint "computadora_id"
+    t.bigint "programa_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["computadora_id"], name: "index_programas_on_computadora_id"

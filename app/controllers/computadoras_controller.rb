@@ -7,7 +7,7 @@ class ComputadorasController < ApplicationController
 
   def show
     @computadora = computadora
-    @programas = Programa.where(computadora: nil)
+    @programas = Programa.where({ computadora: nil })
   end
 
   def instalar
@@ -15,8 +15,13 @@ class ComputadorasController < ApplicationController
     redirect_to computadora_path(computadora)
   end
 
+  def desinstalar
+    computadora.desinstalar(programa)
+    redirect_to computadora_path(computadora)
+  end
+
   def ejecutar
-    programa.ejecutar
+    computadora.ejecutar(programa)
     redirect_to computadora_path(computadora)
   end
 
@@ -28,7 +33,7 @@ class ComputadorasController < ApplicationController
   private
 
   def computadora
-    @computadora ||= Computadora.find_by(id: params[:id])
+    @computadora ||= Computadora.find(params[:id])
   end
 
   def programa

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :computadoras do
     member do
       get :instalar
+      get :desinstalar
       get :ejecutar
       get :frenar
     end
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :computadoras
     resources :programas
+    resources :programa_virus
     resources :logs
 
     root to: 'computadoras#index'

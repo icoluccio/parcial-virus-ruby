@@ -1,0 +1,64 @@
+<h2> Computadora #<%=computadora.id%></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Disco</th>
+      <th>|</th>
+      <th>Memoria</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <%=computadora.disco_disponible%> de <%=computadora.disco%>
+    </td>
+      <td>|</td>
+    <td>
+    <%=computadora.memoria_disponible%> de <%=computadora.memoria%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%=computadora.porcentaje_de_disco%>%" aria-valuenow="75"></div>
+      </div>
+    </td>
+      <td>|</td>
+    <td>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%=computadora.porcentaje_de_memoria%>%" aria-valuenow="75"></div>
+    </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<hr> 
+
+<h3> Programas </h3>
+<table>
+  <tbody>
+      <% computadora.programas.each do |programa| %>
+          <tr>
+            <td> </td>
+            <td> <%= render partial: "programa", locals: { programa: programa } %> </td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<hr> 
+<h2> Programa de más memoria </h2>
+<%=@computadora.programa_de_mas_memoria&.nombre%>
+
+<hr>
+<h2> Instalar </h2>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <% @programas.each do |programa| %>
+      <a href="<%=instalar_computadora_path(@computadora, params: {id_de_programa: programa.id})%>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
+        <%= programa.nombre%>
+      </a>
+    <% end %>
+</div>

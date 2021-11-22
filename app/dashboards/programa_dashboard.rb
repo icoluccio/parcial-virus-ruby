@@ -11,11 +11,13 @@ class ProgramaDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    type: Field::Select.with_options(collection: %w[Programa ProgramaVirus]),
     nombre: Field::String,
     ejecuciones: Field::Number,
     memoria: Field::Number,
     disco: Field::Number,
     computadora: Field::BelongsTo,
+    programas: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,9 +30,11 @@ class ProgramaDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     nombre
+    type
     memoria
     disco
     ejecuciones
+    programas
     computadora
   ].freeze
 
@@ -39,9 +43,11 @@ class ProgramaDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     nombre
+    type
     ejecuciones
     memoria
     disco
+    programas
     computadora
   ].freeze
 
@@ -49,11 +55,12 @@ class ProgramaDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    id
     nombre
+    type
     ejecuciones
     memoria
     disco
+    programas
     computadora
   ].freeze
 
